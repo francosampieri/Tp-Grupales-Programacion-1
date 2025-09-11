@@ -16,6 +16,7 @@ def menu_practico_uno(funciones):
     """
     seguir = True
     while seguir:
+        print("-----PRACTICO 1-----")
         ejercicio_elegido = validar_nat_rango(f"Ingrese el numero de ejercicio que desea ejecutar (1-{len(funciones)-1}) [0] para volver ", [0, len(funciones)-1])
         if ejercicio_elegido == 0: 
             seguir = False
@@ -32,6 +33,7 @@ def menu_practico_dos(funciones):
     """
     seguir = True
     while seguir:
+        print("-----PRACTICO 2-----")
         ejercicio_elegido = validar_nat_rango(f"Ingrese el numero de ejercicio que desea ejecutar (1-{len(funciones)-1}) [0] para volver ", [0, len(funciones)-1])
         if ejercicio_elegido == 0: 
             seguir = False
