@@ -56,7 +56,10 @@ def menu():
         else: menu_practico_dos(funciones_2)
 
 def ejercicio_1():
-    pass
+    nums_list = input("Ingresa una lista de números separados por espacios: ")
+    lista_numeros = [int(num) for num in nums_list.split()]
+    suma = sum(lista_numeros)
+    print("La suma de los elementos es:", suma)
 
 def ejercicio_2():
     lista = (input ("introduce una lista de numeros separados por coma "))
@@ -94,7 +97,13 @@ def ejercicio_6():
     print(lista_numeros)
 
 def ejercicio_7():
-    pass
+    nums = input("Ingresa números separados por espacios: ")
+    lista_num = [int(num) for num in nums.split()]
+    if len(lista_num) > 0:
+        promedio = sum(lista_num) / len(lista_num)
+        print("El promedio de los elementos es:", promedio)
+    else:
+        print("Ingrese un numero")
 
 def ejercicio_8():
     lista_repetidos= ("manzana","banana","melon","sandia","manzana","mandarina")
@@ -149,7 +158,14 @@ def ejercicio_12():
     for i in range(len(lista_sumada)): print(f"{lista_uno[i]} + {lista_dos[i]} = {lista_sumada[i]}")
 
 def ejercicio_13():
-    pass
+    print("NumPy es fundamental para manejar matrices y arrays en python por las siguientes caracteristicas:\nManeja arrays y matrices multidisionales de manera comoda.\nIncluye una gran variedad de funciones matematicas utiles y de algebra lineal.\nEs mucho mas eficiente en memoria que las listas de python.")
+    print("EJEMPLOS")
+    import numpy as np
+    arr = np.array([10, 20, 30, 40])
+    matriz = np.array([[1, 2], 
+                    [3, 4]])
+    print("Array:", arr)
+    print("Matriz:\n", matriz)
 
 def ejercicio_2_1():
     matriz = [
@@ -196,7 +212,25 @@ def ejercicio_2_5():
     print(mayor)
 
 def ejercicio_2_6():
-    pass
+    filas = validar_nat_rango("Ingrese la cantidad de filas de la matriz: ")
+    columnas = validar_nat_rango("Ingrese la cantidad de columnas de la matriz: ")
+    matriz = []
+    for i in range(filas):
+        fila = []
+        for j in range(columnas):
+            num = float(input(f"Ingrese el elemento [{i+1},{j+1}]: "))
+            fila.append(num)
+        matriz.append(fila)
+    escalar = float(input("Ingrese el valor escalar: "))
+    matriz_resultado = []
+    for i in range(filas):
+        fila_resultado = []
+        for j in range(columnas):
+            fila_resultado.append(matriz[i][j] * escalar)
+        matriz_resultado.append(fila_resultado)
+    print("\nMatriz resultante:")
+    for fila in matriz_resultado:
+        print(fila)
 
 def ejercicio_2_7():
     matriz = [
@@ -205,6 +239,7 @@ def ejercicio_2_7():
         [7, 8, 9]]
     for i in range(len(matriz)):
         print(matriz[i][i], end= " ")
+    print() #salto de linea
 
 def ejercicio_2_8():
     numero = validar_nat_rango("Ingrese el tamaño de la matriz ")
@@ -218,7 +253,15 @@ def ejercicio_2_8():
         print(fila)
 
 def ejercicio_2_9():
-    pass
+    numero = validar_nat_rango("Ingrese el tamaño de la matriz ")
+    matriz = []
+    for i in range(numero):
+        fila = [0] * numero
+        matriz.append(fila)
+    for i in range(numero):
+        matriz[i][numero -1 -i] = 1
+    for fila in matriz:
+        print(fila)
 
 def ejercicio_2_10():
     # hago una funcion para ver si es simetrica 
