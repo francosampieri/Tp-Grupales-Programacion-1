@@ -1,8 +1,13 @@
-def validar_int_rango(mensaje,rango):
+def validar_nat_rango(mensaje,rango = None):
     num = input(mensaje)
-    while not num.isnumeric() or int(num) not in range(rango[0],rango[1]+1): #valida primero si es un numero y despues si esta en el rango
-        print("ERROR: Elige un numero entero dentro del rango")
-        num = input(mensaje)
+    if rango != None:
+        while not num.isnumeric() or int(num) not in range(rango[0],rango[1]+1): #valida primero si es un numero y despues si esta en el rango
+            print("ERROR: Ingresa un numero entero dentro del rango")
+            num = input(mensaje)
+    else:
+        while not num.isnumeric():
+            print("ERROR: Ingresa un numero entero")
+            num = input(mensaje)
     return int(num)
 
 def menu_practico_uno(funciones):
@@ -11,7 +16,7 @@ def menu_practico_uno(funciones):
     """
     seguir = True
     while seguir:
-        ejercicio_elegido = validar_int_rango(f"Ingrese el numero de ejercicio que desea ejecutar (1-{len(funciones)-1}) [0] para volver ", [0, len(funciones)-1])
+        ejercicio_elegido = validar_nat_rango(f"Ingrese el numero de ejercicio que desea ejecutar (1-{len(funciones)-1}) [0] para volver ", [0, len(funciones)-1])
         if ejercicio_elegido == 0: 
             seguir = False
             continue
@@ -27,7 +32,7 @@ def menu_practico_dos(funciones):
     """
     seguir = True
     while seguir:
-        ejercicio_elegido = validar_int_rango(f"Ingrese el numero de ejercicio que desea ejecutar (1-{len(funciones)-1}) [0] para volver ", [0, len(funciones)-1])
+        ejercicio_elegido = validar_nat_rango(f"Ingrese el numero de ejercicio que desea ejecutar (1-{len(funciones)-1}) [0] para volver ", [0, len(funciones)-1])
         if ejercicio_elegido == 0: 
             seguir = False
             continue
@@ -43,7 +48,7 @@ def menu():
 
     seguir = True
     while seguir:
-        practico_elegido = validar_int_rango("Ingrese el practico que desea ejecutar (1 ó 2) [0 para terminar] ", (0,2))
+        practico_elegido = validar_nat_rango("Ingrese el practico que desea ejecutar (1 ó 2) [0 para terminar] ", (0,2))
         if practico_elegido == 0:
             seguir = False
             continue
@@ -60,7 +65,6 @@ def ejercicio_2():
     numero_menor = min(numeros)
     print (f"numero mayor de la lista {numero_mayor} ")
     print (f"numero menor de la lista {numero_menor} ")
-
 
 def ejercicio_3():
     lista = input("Ingrese una lista de numeros separados por un espacio ")
@@ -79,7 +83,7 @@ def ejercicio_4():
 
 def ejercicio_5():
     numeros = [2, 4, 6, 8, 10]
-    factor = int(input("INGRESE UN FACTOR PARA MULTIPLICAR LOS NUMEROS DE LA LISTA: "))
+    factor = ("INGRESE UN FACTOR PARA MULTIPLICAR LOS NUMEROS DE LA LISTA: ")
     resultado = [num*factor for num in numeros]
     print("Lista Original", numeros )
     print("Lista Multiplicada", resultado )
@@ -100,10 +104,10 @@ def ejercicio_8():
             conteo[i] += 1
         else:
             conteo[i] = 1
-    print(conteo)
+    print(f"Lista inicial: {lista_repetidos}")
     for elemento in conteo.items():
         if elemento[1]>1:
-            print(elemento)
+            print(f"{elemento[0]} aparece {elemento[1]} veces")
 
 def ejercicio_9():
     def primo (numero):
@@ -113,7 +117,7 @@ def ejercicio_9():
             if numero % i == 0:
                 return False
         return True
-    lista = input("Ingrese una lista de numeros separados por espacios ")
+    lista = input("Ingrese una lista de numeros separados por espacios para saber cuales son primos ")
     lista_usuario = lista.split()
     lista_numeros = [int(x) for x in lista_usuario]
     numero_primos = []
@@ -125,7 +129,7 @@ def ejercicio_9():
 def ejercicio_10():
     lista=(input("Ingrese una lista de numeros separados por espacios: "))
     lista_numeros=[int(x)for x in lista.split()]
-    indice=int(input("Ingrese el indice del numero que quiere eliminar: "))
+    indice=validar_nat_rango("Ingrese el indice del numero que quiere eliminar: ")
     lista_numeros.pop(indice)
     print(lista_numeros)
 
@@ -203,7 +207,7 @@ def ejercicio_2_7():
         print(matriz[i][i], end= " ")
 
 def ejercicio_2_8():
-    numero = int(input("Ingrese el tamaño de la matriz "))
+    numero = validar_nat_rango("Ingrese el tamaño de la matriz ")
     matriz = []
     for i in range(numero):
         fila = [0] * numero
