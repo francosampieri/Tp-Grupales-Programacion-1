@@ -11,7 +11,7 @@ def validar_nat_rango(mensaje,rango = None):
     return int(num)
 
 def menu_practico_uno(funciones):
-    """Menu para seleciconar ejercicios\n
+    """Menu para seleccionar ejercicios\n
     Recibe list con las funciones de cada ejercicio empezando por None
     """
     seguir = True
@@ -60,16 +60,26 @@ def menu():
 def ejercicio_1():
     nums_list = input("Ingresa una lista de números separados por espacios: ")
     lista_numeros = [int(num) for num in nums_list.split()]
-    suma = sum(lista_numeros)
+
+    suma = 0
+    for numero in lista_numeros:
+        suma += numero
+
     print("La suma de los elementos es:", suma)
 
 def ejercicio_2():
-    lista = (input ("introduce una lista de numeros separados por coma "))
-    numeros = [float(num.strip()) for num in lista.split(",")]
-    numero_mayor = max(numeros)
-    numero_menor = min(numeros)
-    print (f"numero mayor de la lista {numero_mayor} ")
-    print (f"numero menor de la lista {numero_menor} ")
+    lista = (input ("Introduce una lista de numeros separados por un espacio "))
+    numeros = [int(num) for num in lista.split()]
+    numero_mayor = numeros[0]
+    numero_menor = numeros[0]
+    for num in numeros:
+        if num > numero_mayor:
+            numero_mayor = num
+        if num < numero_menor:
+            numero_menor = num
+
+    print (f"Numero mayor de la lista {numero_mayor} ")
+    print (f"Numero menor de la lista {numero_menor} ")
 
 def ejercicio_3():
     lista = input("Ingrese una lista de numeros separados por un espacio ")
@@ -88,7 +98,7 @@ def ejercicio_4():
 
 def ejercicio_5():
     numeros = [2, 4, 6, 8, 10]
-    factor = ("INGRESE UN FACTOR PARA MULTIPLICAR LOS NUMEROS DE LA LISTA: ")
+    factor = int(input("INGRESE UN FACTOR PARA MULTIPLICAR LOS NUMEROS DE LA LISTA: "))
     resultado = [num*factor for num in numeros]
     print("Lista Original", numeros )
     print("Lista Multiplicada", resultado )
@@ -96,16 +106,17 @@ def ejercicio_5():
 def ejercicio_6():
     lista_numeros = input("Ingresa una lista de numeros separados por un espacio ").split()
     lista_numeros = list(set(lista_numeros)) #al pasarlo por set elimina los duplicados
-    print(lista_numeros)
+    print(f"Lista sin duplicados: {lista_numeros}")
 
 def ejercicio_7():
-    nums = input("Ingresa números separados por espacios: ")
+    nums = input("Ingresa una lista de números separados por espacios: ")
     lista_num = [int(num) for num in nums.split()]
-    if len(lista_num) > 0:
-        promedio = sum(lista_num) / len(lista_num)
-        print("El promedio de los elementos es:", promedio)
-    else:
-        print("Ingrese un numero")
+
+    suma = 0
+    for n in lista_num: suma += n
+
+    promedio = suma / len(lista_num)
+    print("El promedio de los elementos es:", promedio)
 
 def ejercicio_8():
     lista_repetidos= ("manzana","banana","melon","sandia","manzana","mandarina")
@@ -128,6 +139,7 @@ def ejercicio_9():
             if numero % i == 0:
                 return False
         return True
+    
     lista = input("Ingrese una lista de numeros separados por espacios para saber cuales son primos ")
     lista_usuario = lista.split()
     lista_numeros = [int(x) for x in lista_usuario]
@@ -145,10 +157,15 @@ def ejercicio_10():
     print(lista_numeros)
 
 def ejercicio_11():
-    entrada = input("Ingrese un lista de numero separados por comas: ")
-    numeros = [int(x) for x in entrada.split(",")]
+    entrada = input("Ingrese un lista de numero separados por espacios: ")
+    numeros = [int(x) for x in entrada.split()]
     buscado = int(input("Ingrese el numero que desea buscar "))
-    cantidad = numeros.count(buscado)
+    
+    cantidad = 0
+    for num in numeros:
+        if num == buscado:
+            cantidad += 1
+
     print(f"El numero {buscado} aparece {cantidad} veces.")
 
 def ejercicio_12():
@@ -157,6 +174,7 @@ def ejercicio_12():
     lista_sumada = []
     for i in range(len(lista_uno)):
         lista_sumada.append(lista_uno[i] + lista_dos[i])
+    print(f"Lista 1:\n{lista_uno}\nLista 2:\n{lista_dos}")
     for i in range(len(lista_sumada)): print(f"{lista_uno[i]} + {lista_dos[i]} = {lista_sumada[i]}")
 
 def ejercicio_13():
@@ -174,31 +192,53 @@ def ejercicio_2_1():
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9]]
-    # Suma todos los elementos de la matriz
-    suma_total = sum(sum(fila) for fila in matriz)
-    print(suma_total)
+
+    suma_total = 0
+    print("MATRIZ ORIGINAL", end="")
+    for fila in matriz:
+        print() #salto de linea
+        for num in fila:
+            print(num, end="")
+            suma_total += num
+    print()
+    print(f"La suma total de los numeros es: {suma_total}")
 
 def ejercicio_2_2():
     matriz=[
     [123,50,20],
     [20,30,87],
     [50,65,78]]
-    suma_total=sum(sum(i)for i in matriz)
-    print(suma_total)
+    
+    suma_total=0
+    for fila in matriz:
+        for elemento in fila:
+            suma_total += elemento
+
+    print(f"La suma total de la matriz {matriz} es : {suma_total}")
 
 def ejercicio_2_3():
     matriz=[
-    [123,50,20],
-    [20,30,87],
-    [50,65,78]]
-    suma_total=sum(sum(i)for i in matriz)
-    suma_fila1=sum(matriz[0])
+        [123,50,20],
+        [20,30,87],
+        [50,65,78]
+    ]
+    suma_total=0
+    suma_fila1=0
+    suma_fila2=0
+    suma_fila3=0
+    for fila in matriz:
+        for elemento in fila:
+            suma_total += elemento
+    for elemento in matriz[0]:
+        suma_fila1 += elemento
     print(f"La suma de la fila 1 es: {suma_fila1}")
-    suma_fila2=sum(matriz[1])
+    for elemento in matriz[1]:
+        suma_fila2 += elemento
     print(f"La suma de la fila 2 es: {suma_fila2}")
-    suma_fila3=sum(matriz[2])
+    for elemento in matriz[2]:
+        suma_fila3 += elemento
     print(f"La suma de la fila 3 es: {suma_fila3}")
-    print(f"La suma total es: {suma_total}")
+    print(f"La suma total es: {suma_total}")
 
 def ejercicio_2_4():
     matriz = [
@@ -210,8 +250,14 @@ def ejercicio_2_4():
 
 def ejercicio_2_5():
     lista_bidimensional = [[0,1,28],[0,10,4],[20,-5,21]]
-    mayor = max(max(lista_bidimensional[0]), max(lista_bidimensional[1]), max(lista_bidimensional[2]))
-    print(mayor)
+    mayor = lista_bidimensional[0][0] #inicializar
+    print("MATRIZ")
+    for filas in lista_bidimensional:
+        print(filas)
+        for elementos in filas:
+            if elementos > mayor: mayor = elementos
+    
+    print("El mayor numero de la matriz es", mayor)
 
 def ejercicio_2_6():
     filas = validar_nat_rango("Ingrese la cantidad de filas de la matriz: ")
@@ -299,11 +345,17 @@ def ejercicio_2_11():
             print(columnas, end="")
     print("\n")
     print("MATRIZ GIRADA 90º")
-    matriz.reverse()
-    for i in range(len(matriz)):
+
+    matriz_reversa = []
+    #revierte la matriz sin .reverse()
+    for i in range(len(matriz)-1, -1, -1):  #recorre la matriz desde su ultima fila hacia atras
+        matriz_reversa.append(matriz[i])
+
+    #imprime la matriz intercambiando columnas y filas
+    for i in range(len(matriz_reversa)):
         if i != 0: print()
-        for j in range(len(matriz[0])):
-            print(matriz[j][i], end="")
+        for j in range(len(matriz_reversa[0])):
+            print(matriz_reversa[j][i], end="")
 
 #main
 menu()
